@@ -1,5 +1,6 @@
 ---
 import Tour from '../components/Tour.astro';
+import Navbar from '../components/Navbar.svelte';
 ---
 <html lang="en">
 <head>
@@ -22,14 +23,26 @@ import Tour from '../components/Tour.astro';
     </style>
 </head>
 <body>
+    <Navbar client:load/>
     <main>
-        <header>
-            <div>
-                <img width="300" height="80" src="/assets/logo.png" alt="Czy dobrze - logo">
-                <h1>Zapraszamy!</h1>
+        <div class="bg-gradient-to-br from-indigo-900 to-green-900 min-h-screen overflow-auto">
+          <div class="container max-w-5xl mx-auto px-4">
+            <div class="w-4/5 mx-auto">
+              <h1 class="mt-32 text-white text-6xl font-bold">
+                Witaj na
+                <a href="/">CzyDobrze</a>
+              </h1>
             </div>
-        </header>
-
+            <div class="w-4/5 my-10 mx-auto">
+              <h3 class="text-gray-300">
+                Sprawdź, poprawność odpowiedzi
+                <strong class="text-white">swoich zadań domowych</strong>
+                <br />
+                Szybko, za darmo i bez konsekwencji
+              </h3>
+            </div>
+          </div>
+        </div>
 
 
         <!--
@@ -43,4 +56,9 @@ import Tour from '../components/Tour.astro';
 
     </main>
 </body>
+<style>
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+</style>
 </html>
