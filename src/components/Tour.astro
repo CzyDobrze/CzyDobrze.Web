@@ -1,85 +1,28 @@
 ---
 import { Markdown } from 'astro/components';
+let classesSP=["3", "4", "5", "6", "7", "8"];
+let classesLIC=["1", "2", "3", "4"];
 ---
 <article>
-    <div class="banner">
-        <p><strong>🧑‍🚀 Seasoned astronaut?</strong> Delete this file. Have fun!</p>
-    </div>
+    <p class="text-sm mb-5">Szkoła podstawowa<p>
+    <div class="grid grid-cols-2 gap-4">
+    {classesSP.map((item) => (
+        <div class="border-solid border-white border-4 h-12 rounded-md flex items-center justify-center text-white text-2xl font-extrabold">{item}</div>
+      ))}
 
-    <section>
-        <Markdown>
-            ## 🚀 Project Structure
+      </div>
+    <p class="text-sm mb-5 mt-3">Szkoła ponadpodstawowa/ponadgimnazjalna<p>
+        <div class="grid grid-cols-2 gap-4">
+        {classesLIC.map((item) => (
+            <div class="border-solid border-white border-4 h-12 rounded-md flex items-center justify-center text-white text-2xl font-extrabold">{item}</div>
+          ))}
 
-            Inside of your Astro project, you'll see the following folders and files:
-
-            ```
-            /
-            ├── public/
-            │   ├── robots.txt
-            │   └── favicon.ico
-            ├── src/
-            │   ├── components/
-            │   │   └── Tour.astro
-            │   └── pages/
-            │       └── index.astro
-            └── package.json
-            ```
-
-            Astro looks for `.astro` or `.md` files in the `src/pages/` directory.
-            Each page is exposed as a route based on its file name.
-
-            There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-            Any static assets, like images, can be placed in the `public/` directory.
-        </Markdown>
-    </section>
-
-     <section>
-        <h2>👀 Want to learn more?</h2>
-        <p>Feel free to check <a href="https://github.com/snowpackjs/astro">our documentation</a> or jump into our <a href="https://astro.build/chat">Discord server</a>.</p>
-    </section>
-    
+          </div>
 </article>
 
 <style>
-    article {
-        padding-top: 2em;
-        line-height: 1.5;
-    }
-    section {
-        margin-top: 2em;
-        display: flex;
-        flex-direction: column;
-        gap: 1em;
-        max-width: 70ch;
-    }
+    @tailwind base;
+    @tailwind components;
+    @tailwind utilities;
 
-    .banner {
-        text-align: center;
-        font-size: 1.2rem;
-        background: var(--color-light);
-        padding: 1em 1.5em;
-        padding-left: 0.75em;
-        border-radius: 4px;
-    }
-
-    pre,
-    code {
-        font-family: var(--font-mono);
-        background: var(--color-light);
-        border-radius: 4px;
-    }
-
-    pre {
-        padding: 1em 1.5em;
-    }
-
-    .tree {
-        line-height: 1.2;
-    }
-
-    code:not(.tree) {
-        padding: 0.125em;
-        margin: 0 -0.125em;
-    }
 </style>
