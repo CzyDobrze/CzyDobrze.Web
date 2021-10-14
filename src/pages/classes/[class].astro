@@ -1,0 +1,83 @@
+---
+import Navbar from '../../components/Navbar.astro';
+export async function getStaticPaths() {
+let classes=["3sp", "4sp", "5sp", "6sp", "7sp", "8sp", "1lic", "2lic", "3lic", "4lic"];
+let params=[];
+classes.map((item) => (
+    params.push({ params: { "class": item}})
+))
+return params;
+}
+const cl = Astro.request.params.class;
+const clFormat = cl.replace("sp"," szkoły podstawowej").replace("lic"," liceum")
+
+let books = [
+{
+    "title": "Test 1",
+    "subject": "Informatyka",
+    "publisher": "Admin"
+},
+{
+    "title": "Test 2",
+    "subject": "Język angielski",
+    "publisher": "Admin"
+},
+{
+    "title": "Test 3",
+    "subject": "Fizyka",
+    "publisher": "Admin"
+}
+];
+---
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Czy dobrze?</title>
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+    <link rel="stylesheet" href="/style/global.css">
+    <link rel="stylesheet" href="/style/home.css">
+
+    <style>
+        header {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+            max-width: min(100%, 70ch);
+        }
+    </style>
+</head>
+<body>
+<Navbar/>
+<main>
+    <div class="bg-gradient-to-br from-indigo-900 to-green-900 min-h-screen overflow-auto">
+        <div class="container max-w-5xl mx-auto px-4">
+            <div class="w-4/5 mx-auto">
+                <h1 class="mt-32 text-white text-6xl font-bold">
+                    Klasa {clFormat}
+                </h1>
+            </div>
+            {books.map((item) => (
+            <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl my-4">
+                <div class="md:flex">
+                    <div class="p-8">
+                        <div class="uppercase tracking-wide text-sm text-indigo-500 font-semibold">{item.subject}</div>
+                        <a href="#" class="block mt-1 text-lg leading-tight font-medium text-black hover:underline">{item.title}</a>
+                        <p class="mt-2 text-gray-500">Wydawnictwo: {item.publisher}</p>
+                    </div>
+                </div>
+            </div>
+            ))}
+        </div>
+    </div>
+</main>
+<style>
+    @tailwind base;
+    @tailwind components;
+    @tailwind utilities;
+
+</style>
+</body>
+</html>

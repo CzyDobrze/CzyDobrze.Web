@@ -7,14 +7,14 @@ let classesLIC=["1", "2", "3", "4"];
     <p class="text-sm mb-5">Szkoła podstawowa<p>
     <div class="grid grid-cols-2 gap-4">
     {classesSP.map((item) => (
-        <div class="border-solid border-white border-4 h-12 rounded-md flex items-center justify-center text-white text-2xl font-extrabold">{item}</div>
+        <a href={Astro.resolve(`/classes/${item}sp`)} class="border-solid border-white border-4 h-12 rounded-md flex items-center justify-center text-white text-2xl font-extrabold">{item}</a>
       ))}
 
       </div>
-    <p class="text-sm mb-5 mt-3">Szkoła ponadpodstawowa/ponadgimnazjalna<p>
+    <p class="text-sm mb-5 mt-3">Liceum<p>
         <div class="grid grid-cols-2 gap-4">
         {classesLIC.map((item) => (
-            <div class="border-solid border-white border-4 h-12 rounded-md flex items-center justify-center text-white text-2xl font-extrabold">{item}</div>
+            <a href={Astro.resolve(`/classes/${item}lic`)} class="border-solid border-white border-4 h-12 rounded-md flex items-center justify-center text-white text-2xl font-extrabold">{item}</a>
           ))}
 
           </div>
