@@ -1,5 +1,5 @@
 ---
-import Navbar from '../components/Navbar.astro';
+import Navbar from '../components/Navbar.svelte';
 import SectionList from '../components/SectionList.svelte';
 ---
 <html lang="en">
@@ -23,7 +23,7 @@ import SectionList from '../components/SectionList.svelte';
     </style>
 </head>
 <body>
-<Navbar/>
+<Navbar client:visible></Navbar>
 <main>
     <div class="bg-gradient-to-br from-indigo-900 to-green-900 min-h-screen overflow-auto">
         <SectionList client:visible></SectionList>

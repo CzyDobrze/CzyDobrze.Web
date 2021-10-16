@@ -1,6 +1,6 @@
 ---
 import Tour from '../components/ClassList.astro';
-import Navbar from '../components/Navbar.astro';
+import Navbar from '../components/Navbar.svelte';
 ---
 <html lang="en">
 <head>
@@ -23,7 +23,7 @@ import Navbar from '../components/Navbar.astro';
     </style>
 </head>
 <body>
-    <Navbar/>
+<Navbar client:visible></Navbar>
     <main>
         <div class="bg-gradient-to-br from-indigo-900 to-green-900 min-h-screen overflow-auto">
           <div class="container max-w-5xl mx-auto px-4">
