@@ -1,0 +1,33 @@
+---
+import Navbar from '../components/Navbar.astro';
+import SectionList from '../components/SectionList.svelte';
+---
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Czy dobrze?</title>
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+    <link rel="stylesheet" href="/style/global.css">
+    <link rel="stylesheet" href="/style/home.css">
+
+    <style>
+        header {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+            max-width: min(100%, 70ch);
+        }
+    </style>
+</head>
+<body>
+<Navbar/>
+<main>
+    <div class="bg-gradient-to-br from-indigo-900 to-green-900 min-h-screen overflow-auto">
+        <SectionList client:visible></SectionList>
+    </div>
+</main>
+</body>
+</html>

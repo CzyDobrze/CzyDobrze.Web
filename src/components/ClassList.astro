@@ -1,20 +1,20 @@
 ---
 import { Markdown } from 'astro/components';
-let classesSP=["3", "4", "5", "6", "7", "8"];
+let classesSP=["1", "2", "3", "4", "5", "6", "7", "8"];
 let classesLIC=["1", "2", "3", "4"];
 ---
 <article>
     <p class="text-sm mb-5">Szkoła podstawowa<p>
     <div class="grid grid-cols-2 gap-4">
     {classesSP.map((item) => (
-        <a href={Astro.resolve(`/classes/${item}sp`)} class="border-solid border-white border-4 h-12 rounded-md flex items-center justify-center text-white text-2xl font-extrabold">{item}</a>
+        <a href={`/class?id=${item}sp`} class="border-solid border-white border-4 h-12 rounded-md flex items-center justify-center text-white text-2xl font-extrabold">{item}</a>
       ))}
 
       </div>
     <p class="text-sm mb-5 mt-3">Liceum<p>
         <div class="grid grid-cols-2 gap-4">
         {classesLIC.map((item) => (
-            <a href={Astro.resolve(`/classes/${item}lic`)} class="border-solid border-white border-4 h-12 rounded-md flex items-center justify-center text-white text-2xl font-extrabold">{item}</a>
+            <a href={`/class?id=${item}lic`} class="border-solid border-white border-4 h-12 rounded-md flex items-center justify-center text-white text-2xl font-extrabold">{item}</a>
           ))}
 
           </div>
