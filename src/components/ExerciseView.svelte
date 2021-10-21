@@ -1,9 +1,18 @@
 <script>
     import { onMount } from 'svelte';
     let currentExercise = {"answers":[]};
+    let ownAnswer = {
+        "content":"",
+        "excerciseId":0
+    }
+    function submitOwnAnswer(){
+        console.log(ownAnswer)
+        //TODO: submit answer data
+    }
     onMount(async () => {
         const urlParams = new URLSearchParams(window.location.search);
         const exerciseId = urlParams.get('id');
+        ownAnswer.excerciseId=exerciseId;
         //TODO: Fetch current exercise from API
         currentExercise=
             {
@@ -96,6 +105,21 @@
         </p>
     </div>
     <slot></slot>
+    <div class="max-w-md mx-auto bg-gray-900 rounded-xl shadow-md overflow-hidden md:max-w-2xl my-4">
+        <div class="md:flex">
+            <div class="p-8 w-full">
+                <div class="uppercase tracking-wide text-sm text-indigo-500 font-semibold">Dodaj swoje rozwiązanie</div>
+                <div class="flex flex-wrap -mx-3 mb-6 mt-3">
+                    <div class="w-full px-3">
+                        <textarea id="exercise-answer" bind:value={ownAnswer.content} placeholder="Podaj swoje rozwiązanie do tego zadania" class="appearance-none block w-full bg-gray-200 text-gray-700 border {ownAnswer.content.length>0?'border-gray-200':'border-red-500'} rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"></textarea>
+                    </div>
+                </div>
+                <button on:click={submitOwnAnswer} class="w-full shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="button">
+                    Prześlij
+                </button>
+            </div>
+        </div>
+    </div>
     {#each currentExercise.answers as item}
             <div class="max-w-md mx-auto bg-gray-800 rounded-xl shadow-md overflow-hidden md:max-w-2xl my-4">
                 <div class="md:flex">
