@@ -23,10 +23,10 @@ import SectionList from '../components/SectionList.svelte';
     </style>
 </head>
 <body>
-<Navbar client:visible></Navbar>
+<Navbar client:idle></Navbar>
 <main>
     <div class="bg-gradient-to-br from-indigo-900 to-green-900 min-h-screen overflow-auto">
-        <SectionList client:visible></SectionList>
+        <SectionList client:idle></SectionList>
     </div>
 </main>
 <style>

@@ -23,7 +23,7 @@ import Navbar from '../components/Navbar.svelte';
     </style>
 </head>
 <body>
-<Navbar client:visible></Navbar>
+<Navbar client:idle></Navbar>
 <main>
     <div class="bg-gradient-to-br from-indigo-900 to-green-900 min-h-screen overflow-auto">
         <div class="container max-w-5xl mx-auto px-4">
@@ -38,7 +38,7 @@ import Navbar from '../components/Navbar.svelte';
                 </h3>
             </div>
             <div class="w-4/5 my-10 mx-auto">
-                <AddExerciseForm client:visible></AddExerciseForm>
+                <AddExerciseForm client:idle></AddExerciseForm>
             </div>
         </div>
     </div>

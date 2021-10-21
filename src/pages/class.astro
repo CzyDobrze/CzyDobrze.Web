@@ -23,10 +23,10 @@ import BookList from '../components/BookList.svelte';
     </style>
 </head>
 <body>
-<Navbar client:visible></Navbar>
+<Navbar client:idle></Navbar>
 <main>
     <div class="bg-gradient-to-br from-indigo-900 to-green-900 min-h-screen overflow-auto">
-        <BookList client:visible></BookList>
+        <BookList client:idle></BookList>
     </div>
 </main>
 <style>
