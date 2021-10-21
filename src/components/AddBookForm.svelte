@@ -1,11 +1,18 @@
 <script>
+    import { onMount } from 'svelte';
     let classesSP=["1", "2", "3", "4", "5", "6", "7", "8"];
     let classesLIC=["1", "2", "3", "4"];
+    let cl=0;
+    onMount(async () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        cl=Number(urlParams.get('class'));
+        bookData.classYear=cl;
+    })
     let bookData={
         "title": "",
         "subject": "",
         "publisher": "",
-        "classYear": 0
+        "classYear": cl
     }
     function submit(){
         console.log(bookData)

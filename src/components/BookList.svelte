@@ -1,11 +1,12 @@
 <script>
         import { onMount } from 'svelte';
+        let cl;
         let clFormat = "";
         let books=[];
         onMount(async () => {
             const urlParams = new URLSearchParams(window.location.search);
-            const cl = urlParams.get('id');
-            clFormat = cl.replace("sp", " szkoły podstawowej").replace("lic", " liceum");
+            cl = Number(urlParams.get('id'));
+            clFormat = `${cl<8?cl+1:cl-7} ${cl>7?"liceum":"szkoły podstawowej"}`
             //TODO: Fetch books from API
             books = [
                 {
@@ -49,6 +50,16 @@
         </div>
     </a>
         {/each}
+    <a href="/addBook?class={cl}">
+        <div class="max-w-md mx-auto bg-gray-900 rounded-xl shadow-md overflow-hidden md:max-w-2xl my-4">
+            <div class="md:flex">
+                <div class="p-8">
+                    <div class="uppercase tracking-wide text-sm text-indigo-500 font-semibold">Nie widzisz swojej książki?</div>
+                    <p class="block mt-1 text-lg leading-tight font-medium">Dodaj ją!</p>
+                </div>
+            </div>
+        </div>
+    </a>
 </div>
 <style>
     @tailwind base;
