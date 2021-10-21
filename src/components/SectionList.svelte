@@ -1,6 +1,8 @@
 <script>
     import { onMount } from 'svelte';
-    let currentBook = {};
+    let currentBook = {
+        "id":0
+    };
     let sections = [];
     onMount(async () => {
         const urlParams = new URLSearchParams(window.location.search);
@@ -54,6 +56,16 @@
             </div>
         </a>
     {/each}
+    <a href="/addSection?bookId={currentBook.id}">
+        <div class="max-w-md mx-auto bg-gray-900 rounded-xl shadow-md overflow-hidden md:max-w-2xl my-4">
+            <div class="md:flex">
+                <div class="p-8">
+                    <div class="uppercase tracking-wide text-sm text-indigo-500 font-semibold">Czegoś tu brakuje?</div>
+                    <p class="block mt-1 text-lg leading-tight font-medium">Dodaj sekcję!</p>
+                </div>
+            </div>
+        </div>
+    </a>
 </div>
 <style>
     @tailwind base;

@@ -2,9 +2,10 @@
     import { onMount } from 'svelte';
     let currentSection = {};
     let exercises = [];
+    let sectionId;
     onMount(async () => {
         const urlParams = new URLSearchParams(window.location.search);
-        const sectionId = urlParams.get('id');
+        sectionId = urlParams.get('id');
         //TODO: Fetch current section from API
         currentSection={
             "id":sectionId,
@@ -58,6 +59,16 @@
             </div>
         </a>
     {/each}
+    <a href="/addExercise?sectionId={sectionId}">
+        <div class="max-w-md mx-auto bg-gray-900 rounded-xl shadow-md overflow-hidden md:max-w-2xl my-4">
+            <div class="md:flex">
+                <div class="p-8">
+                    <div class="uppercase tracking-wide text-sm text-indigo-500 font-semibold">Czy w tej sekcji brakuje Twojego zadania?</div>
+                    <p class="block mt-1 text-lg leading-tight font-medium">Dodaj je!</p>
+                </div>
+            </div>
+        </div>
+    </a>
 </div>
 <style>
     @tailwind base;
