@@ -18,10 +18,3 @@ let classesLIC=["1", "2", "3", "4"];
 
           </div>
 </article>
-
-<style>
-    @tailwind base;
-    @tailwind components;
-    @tailwind utilities;
-
-</style>
