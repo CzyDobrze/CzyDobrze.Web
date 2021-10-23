@@ -70,6 +70,7 @@
                     }
                 ]
             }
+        document.title=`${currentExercise.description} | Czy dobrze?`;
     });
     function like(){
         // TODO: send like

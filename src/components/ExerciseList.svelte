@@ -16,6 +16,7 @@
             "title": "Sekcja "+sectionId,
             "description": "Tabliczka mnożenia"
         }
+        document.title=`${currentSection.title} | Czy dobrze?`;
         //TODO: Fetch exercises from API
         exercises = [
             {

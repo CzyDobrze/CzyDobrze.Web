@@ -6,7 +6,8 @@
         onMount(async () => {
             const urlParams:URLSearchParams = new URLSearchParams(window.location.search);
             cl = Number(urlParams.get('id'));
-            clFormat = `${cl<8?cl+1:cl-7} ${cl>7?"liceum":"szkoły podstawowej"}`
+            clFormat = `${cl<8?cl+1:cl-7} ${cl>7?"liceum":"szkoły podstawowej"}`;
+            document.title=`Klasa ${clFormat} | Czy dobrze?`;
             //TODO: Fetch books from API
             books = [
                 {

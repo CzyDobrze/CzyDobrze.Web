@@ -17,6 +17,7 @@
             "subject": "Matematyka",
             "publisher": "Admin"
         }
+        document.title=`${currentBook.title} | Czy dobrze?`;
         //TODO: Fetch sections from API
         sections = [
             {
