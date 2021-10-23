@@ -1,42 +1,14 @@
-# Welcome to [Astro](https://astro.build)
+# Front-end aplikacji [CzyDobrze](https://czydobrze.netlify.app)
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/snowpackjs/astro/tree/latest/examples/starter)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/3b8c85c8-f47f-43e3-aaf1-2b2cd3f0c1c3/deploy-status)](https://app.netlify.com/sites/czydobrze/deploys)
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## 🚀 Uruchomienie
 
-## 🚀 Project Structure
+1. Pobierz i zainstaluj [NodeJS 14](https://nodejs.org/en/download/)
+2. Zainstaluj wymagania aplikacji za pomocą komendy `npm install`
+3. Aby uruchomić aplikację w trybie deweloperskim użyj komendy `npm run dev` i przejdź pod adres `localhost:3000`
+4. Aby skompilować aplikację w trybie produkcyjnym, na przykład w celu umieszczenia jej na serwerze użyj polecenia `npm run build`. Gotową aplikację znajdziesz w folderze `./dist/`
 
-Inside of your Astro project, you'll see the following folders and files:
+## 🧞 Skład zespołu
 
-```
-/
-├── public/
-│   ├── robots.txt
-│   └── favicon.ico
-├── src/
-│   ├── components/
-│   │   └── Tour.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command         | Action                                      |
-|:----------------|:--------------------------------------------|
-| `npm install`   | Installs dependencies                       |
-| `npm run dev`   | Starts local dev server at `localhost:3000` |
-| `npm run build` | Build your production site to `./dist/`     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://github.com/snowpackjs/astro) or jump into our [Discord server](https://astro.build/chat).
+* [Piotr Trybisz](https://ptrybisz.tk/)
