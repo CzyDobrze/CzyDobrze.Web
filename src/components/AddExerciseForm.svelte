@@ -1,8 +1,8 @@
-<script>
+<script lang="ts">
     import { onMount } from 'svelte';
-    let sectionId=0;
+    let sectionId:number;
     onMount(async () => {
-        const urlParams = new URLSearchParams(window.location.search);
+        const urlParams:URLSearchParams = new URLSearchParams(window.location.search);
         sectionId=Number(urlParams.get('sectionId'));
         exerciseData.sectionId=sectionId;
     })

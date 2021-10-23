@@ -1,9 +1,9 @@
-<script>
+<script lang="ts">
     import { onMount } from 'svelte';
     let comments = [];
     let ownComment = {
         "content":"",
-        "answerId":0
+        "answerId":""
     }
     function submitOwnComment(){
         console.log(ownComment)
@@ -11,8 +11,7 @@
     }
     onMount(async () => {
         const urlParams = new URLSearchParams(window.location.search);
-        const answer = urlParams.get('answerId');
-        ownComment.answerId=answer;
+        ownComment.answerId = urlParams.get('answerId');
         //TODO: Fetch current exercise from API
         comments=[
             {

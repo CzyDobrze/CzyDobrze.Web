@@ -1,6 +1,6 @@
-<script>
-let classesSP=["1", "2", "3", "4", "5", "6", "7", "8"];
-let classesLIC=["1", "2", "3", "4"];
+<script lang="ts">
+const classesSP=["1", "2", "3", "4", "5", "6", "7", "8"];
+const classesLIC=["1", "2", "3", "4"];
 </script>
 <article>
     <p class="text-sm mb-5">Szkoła podstawowa<p>

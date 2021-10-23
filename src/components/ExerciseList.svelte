@@ -1,11 +1,15 @@
-<script>
+<script lang="ts">
     import { onMount } from 'svelte';
-    let currentSection = {};
+    let currentSection = {
+        "id":0,
+        "title":"",
+        "description":""
+    };
     let exercises = [];
-    let sectionId;
+    let sectionId:number;
     onMount(async () => {
-        const urlParams = new URLSearchParams(window.location.search);
-        sectionId = urlParams.get('id');
+        const urlParams:URLSearchParams = new URLSearchParams(window.location.search);
+        sectionId = Number(urlParams.get('id'));
         //TODO: Fetch current section from API
         currentSection={
             "id":sectionId,

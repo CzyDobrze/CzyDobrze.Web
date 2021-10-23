@@ -1,9 +1,9 @@
-<script>
+<script lang="ts">
     import { onMount } from 'svelte';
-    let currentExercise = {"answers":[]};
+    let currentExercise = {};
     let ownAnswer = {
         "content":"",
-        "excerciseId":0
+        "excerciseId":""
     }
     function submitOwnAnswer(){
         console.log(ownAnswer)
@@ -11,8 +11,7 @@
     }
     onMount(async () => {
         const urlParams = new URLSearchParams(window.location.search);
-        const exerciseId = urlParams.get('id');
-        ownAnswer.excerciseId=exerciseId;
+        ownAnswer.excerciseId = urlParams.get('id');
         //TODO: Fetch current exercise from API
         currentExercise=
             {
@@ -98,10 +97,10 @@
 <div class="container max-w-5xl mx-auto px-4">
     <div class="w-4/5 mx-auto">
         <h1 class="mt-32 text-white text-6xl font-bold">
-            {currentExercise.inBookId}
+            {currentExercise.inBookId||""}
         </h1>
         <p class="text-white">
-            {currentExercise.description}
+            {currentExercise.description||""}
         </p>
     </div>
     <slot></slot>
@@ -120,7 +119,7 @@
             </div>
         </div>
     </div>
-    {#each currentExercise.answers as item}
+    {#each currentExercise.answers||[] as item}
             <div class="max-w-md mx-auto bg-gray-800 rounded-xl shadow-md overflow-hidden md:max-w-2xl my-4">
                 <div class="md:flex">
                     <div class="p-8">

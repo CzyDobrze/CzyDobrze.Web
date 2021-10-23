@@ -1,5 +1,5 @@
-<script>
-    let mobileMenuOpen = false;
+<script lang="ts">
+    let mobileMenuOpen:boolean = false;
 </script>
 <nav class="bg-gray-600">
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">

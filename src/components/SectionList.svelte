@@ -1,12 +1,15 @@
-<script>
+<script lang="ts">
     import { onMount } from 'svelte';
     let currentBook = {
-        "id":0
+        "id":0,
+        "title":"",
+        "subject":"",
+        "publisher":""
     };
     let sections = [];
     onMount(async () => {
-        const urlParams = new URLSearchParams(window.location.search);
-        const bookId = urlParams.get('id');
+        const urlParams:URLSearchParams = new URLSearchParams(window.location.search);
+        const bookId:number = Number(urlParams.get('id'));
         //TODO: Fetch current book from API
         currentBook={
             "id":bookId,

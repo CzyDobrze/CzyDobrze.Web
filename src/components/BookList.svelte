@@ -1,10 +1,10 @@
-<script>
+<script lang="ts">
         import { onMount } from 'svelte';
-        let cl;
-        let clFormat = "";
+        let cl:number;
+        let clFormat:string="";
         let books=[];
         onMount(async () => {
-            const urlParams = new URLSearchParams(window.location.search);
+            const urlParams:URLSearchParams = new URLSearchParams(window.location.search);
             cl = Number(urlParams.get('id'));
             clFormat = `${cl<8?cl+1:cl-7} ${cl>7?"liceum":"szkoły podstawowej"}`
             //TODO: Fetch books from API

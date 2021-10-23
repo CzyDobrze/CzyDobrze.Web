@@ -1,8 +1,8 @@
-<script>
+<script lang="ts">
     import { onMount } from 'svelte';
-    let bookId=0;
+    let bookId:number;
     onMount(async () => {
-        const urlParams = new URLSearchParams(window.location.search);
+        const urlParams:URLSearchParams = new URLSearchParams(window.location.search);
         bookId=Number(urlParams.get('bookId'));
         sectionData.textbookId=bookId;
     })

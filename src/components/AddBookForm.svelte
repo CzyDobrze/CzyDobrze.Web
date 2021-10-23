@@ -1,10 +1,10 @@
-<script>
+<script lang="ts">
     import { onMount } from 'svelte';
-    let classesSP=["1", "2", "3", "4", "5", "6", "7", "8"];
-    let classesLIC=["1", "2", "3", "4"];
-    let cl=0;
+    const classesSP=["1", "2", "3", "4", "5", "6", "7", "8"];
+    const classesLIC=["1", "2", "3", "4"];
+    let cl:number;
     onMount(async () => {
-        const urlParams = new URLSearchParams(window.location.search);
+        const urlParams:URLSearchParams = new URLSearchParams(window.location.search);
         cl=Number(urlParams.get('class'));
         bookData.classYear=cl;
     })
