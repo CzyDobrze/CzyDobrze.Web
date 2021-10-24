@@ -1,0 +1,23 @@
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  release:
+    name: Build and publish docker image
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Build & push docker image
+        uses: mr-smithers-excellent/docker-build-push@v5.6
+        with:
+          image: czydobrze.web
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          addLatest: true
