@@ -3,7 +3,7 @@
     import createAuth0Client from "@auth0/auth0-spa-js";
     let auth0 = null;
     let token = null;
-    let loggedIn = false;
+    let loggedIn = true;
     const configureClient = async () => {
         auth0 = await createAuth0Client({
             audience: "https://czydobrze.bazik.xyz",
@@ -19,6 +19,8 @@
         await updateUI();
         //console.log(token)
         localStorage.token=token;
+        const user = await auth0.getUser();
+        console.log(user);
     })
     const updateUI = async () => {
         const isAuthenticated = await auth0.isAuthenticated();
@@ -28,17 +30,14 @@
         }
         else{
             loggedIn=false
-            if(window.location.href.includes("recipe/submit")){
-                await login()
-            }
             console.log("LoggedOut")
         }
         const query = window.location.search;
         if (query.includes("code=") && query.includes("state=")) {
             await auth0.handleRedirectCallback();
 
-            updateUI();
             window.history.replaceState({}, document.title, "/");
+            updateUI();
         }
         token = await auth0.getTokenSilently();
     };
@@ -79,9 +78,9 @@
                     <div class="flex space-x-4">
                         <a href="/" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Wszystkie</a>
 
-                        <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Ulubione</a>
+                        <a href="/soon" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Ulubione</a>
 
-                        <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Szczęśliwy Traf</a>
+                        <a href="/soon" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Szczęśliwy Traf</a>
                     </div>
                 </div>
             </div>
@@ -107,10 +106,32 @@
         <div class="px-2 pt-2 pb-3 space-y-1">
             <a href="/" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Wszystkie</a>
 
-            <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Ulubione</a>
+            <a href="/soon" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Ulubione</a>
 
-            <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Szczęśliwy Traf</a>
+            <a href="/soon" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Szczęśliwy Traf</a>
         </div>
     </div>
 </nav>
+<div class="bg-red-600 {loggedIn?'hidden':''}">
+    <div class="max-w-7xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between flex-wrap">
+            <div class="w-0 flex-1 flex items-center">
+        <span class="flex p-2 rounded-lg bg-red-800">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+</svg>
+        </span>
+                <p class="ml-3 font-medium text-white truncate">
+          <span class="md:hidden">
+            Nie jesteś zalogowany.
+          </span>
+                    <span class="hidden md:inline">
+            Nie jesteś zalogowany. Aplikacja działa w trybie tylko do odczytu.
+          </span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
 <slot></slot>

@@ -1,0 +1,51 @@
+---
+import Navbar from '../components/Navbar.svelte';
+---
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Czy dobrze?</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/assets/safari-pinned-tab.svg" color="#312e81">
+    <meta name="apple-mobile-web-app-title" content="CzyDobrze">
+    <meta name="application-name" content="CzyDobrze">
+    <meta name="msapplication-TileColor" content="#312e81">
+    <meta name="theme-color" content="#312e81">
+
+    <link rel="stylesheet" href="/style/global.css">
+    <link rel="stylesheet" href="/style/home.css">
+    <link rel="stylesheet" href="/style/tailwind.min.css">
+
+    <style>
+        header {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+            max-width: min(100%, 70ch);
+        }
+    </style>
+</head>
+<body>
+<Navbar client:idle></Navbar>
+<main>
+    <div class="bg-gradient-to-br from-indigo-900 to-green-900 min-h-screen overflow-auto">
+    <div class="container max-w-5xl mx-auto px-4">
+        <div class="w-4/5 mx-auto">
+            <p class="mt-32 text-white text-2xl font-bold">
+                Nie zaimplementowano
+            </p>
+            <p class="text-white">
+                Ta funkcja będzie dostępna w przyszłej wersji aplikacji.
+            </p>
+        </div>
+    </div>
+    </div>
+</main>
+
+</body>
+</html>
