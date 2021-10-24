@@ -12,7 +12,7 @@
             {
                 "method": "POST",
                 "body": JSON.stringify(ownAnswer),
-                "headers": {"content-type": "application/json"}
+                "headers": {"content-type": "application/json", "Authorization": `Bearer ${localStorage.token}`}
             }
         ).then(d2 => {
             d2.json().then(data2 => {
@@ -24,12 +24,12 @@
     onMount(async () => {
         const urlParams = new URLSearchParams(window.location.search);
         ownAnswer.exerciseId = urlParams.get('id');
-        fetch(`https://czydobrze.bazik.xyz/api/exercise/${urlParams.get('id')}`).then(d=>{d.json().then(ex=>
+        fetch(`https://czydobrze.bazik.xyz/api/exercise/${urlParams.get('id')}`,{"headers": {"Authorization": `Bearer ${localStorage.token}`}}).then(d=>{d.json().then(ex=>
         {
             currentExercise=ex
             document.title=`${currentExercise["inBookId"]} | Czy dobrze?`;
         })})
-        fetch(`https://czydobrze.bazik.xyz/api/exercise/${urlParams.get('id')}/answers?page=0&amount=100`).then(d=>{d.json().then(ans=>
+        fetch(`https://czydobrze.bazik.xyz/api/exercise/${urlParams.get('id')}/answers?page=0&amount=100`,{"headers": {"Authorization": `Bearer ${localStorage.token}`}}).then(d=>{d.json().then(ans=>
         {
             answers=ans
         })})

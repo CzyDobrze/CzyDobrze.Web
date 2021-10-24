@@ -10,7 +10,7 @@
             ...newBatch
         ];
         function fetchData(){
-            fetch(`https://czydobrze.bazik.xyz/api/textbook?page=${currentPage++}&amount=100`).then(d=>{d.json().then(fetchedBooks=>
+            fetch(`https://czydobrze.bazik.xyz/api/textbook?page=${currentPage++}&amount=100`,{"headers": {"Authorization": `Bearer ${localStorage.token}`}}).then(d=>{d.json().then(fetchedBooks=>
             {
                 newBatch=fetchedBooks.filter(obj => {
                     return obj.classYear === cl

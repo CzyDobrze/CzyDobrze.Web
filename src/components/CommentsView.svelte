@@ -11,7 +11,7 @@
             {
                 "method": "POST",
                 "body": JSON.stringify(ownComment),
-                "headers": {"content-type": "application/json"}
+                "headers": {"content-type": "application/json", "Authorization": `Bearer ${localStorage.token}`}
             }
         ).then(d2 => {
             d2.json().then(data2 => {
@@ -22,12 +22,12 @@
     }
     onMount(async () => {
         const urlParams = new URLSearchParams(window.location.search);
-        fetch(`https://czydobrze.bazik.xyz/api/answer/${urlParams.get('answerId')}`).then(d=>{d.json().then(ans=>
+        fetch(`https://czydobrze.bazik.xyz/api/answer/${urlParams.get('answerId')}`,{"headers": {"Authorization": `Bearer ${localStorage.token}`}}).then(d=>{d.json().then(ans=>
         {
             currentAnswer=ans
             document.title=`Komentarze | ${currentAnswer["content"]} | Czy dobrze?`;
         })})
-        fetch(`https://czydobrze.bazik.xyz/api/answer/${urlParams.get('answerId')}/comments?page=0&amount=100`).then(d=>{d.json().then(com=>
+        fetch(`https://czydobrze.bazik.xyz/api/answer/${urlParams.get('answerId')}/comments?page=0&amount=100`,{"headers": {"Authorization": `Bearer ${localStorage.token}`}}).then(d=>{d.json().then(com=>
         {
             comments=com
         })})

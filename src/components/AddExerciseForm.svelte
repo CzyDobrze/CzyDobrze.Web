@@ -23,7 +23,7 @@
             {
                 "method":"POST",
                 "body":JSON.stringify(exerciseData),
-                "headers": {"content-type":"application/json"}
+                "headers": {"content-type":"application/json", "Authorization": `Bearer ${localStorage.token}`}
             }
         ).then(d=>{d.json().then(data=>
         {
@@ -33,7 +33,7 @@
                     {
                         "method": "POST",
                         "body": JSON.stringify(answerData),
-                        "headers": {"content-type": "application/json"}
+                        "headers": {"content-type": "application/json", "Authorization": `Bearer ${localStorage.token}`}
                     }
                 ).then(d2 => {
                     d2.json().then(data2 => {

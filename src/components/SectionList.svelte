@@ -10,12 +10,12 @@
     onMount(async () => {
         const urlParams:URLSearchParams = new URLSearchParams(window.location.search);
         const bookId:string = urlParams.get('id');
-        fetch(`https://czydobrze.bazik.xyz/api/textbook/${bookId}`).then(d=>{d.json().then(book=>
+        fetch(`https://czydobrze.bazik.xyz/api/textbook/${bookId}`,{"headers": {"Authorization": `Bearer ${localStorage.token}`}}).then(d=>{d.json().then(book=>
         {
             currentBook=book
             document.title=`${currentBook.title} | Czy dobrze?`;
         })})
-        fetch(`https://czydobrze.bazik.xyz/api/textbook/${bookId}/sections?page=0&amount=100`).then(d=>{d.json().then(sects=>
+        fetch(`https://czydobrze.bazik.xyz/api/textbook/${bookId}/sections?page=0&amount=100`,{"headers": {"Authorization": `Bearer ${localStorage.token}`}}).then(d=>{d.json().then(sects=>
         {
             sections=sects
         })})

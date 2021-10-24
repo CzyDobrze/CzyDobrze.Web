@@ -20,7 +20,7 @@
             {
                 "method":"POST",
                 "body":JSON.stringify(bookData),
-                "headers": {"content-type":"application/json"}
+                "headers": {"content-type":"application/json", "Authorization": `Bearer ${localStorage.token}`}
             }
         ).then(d=>{d.json().then(data=>
         {
