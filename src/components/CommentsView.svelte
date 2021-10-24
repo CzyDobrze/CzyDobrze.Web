@@ -60,7 +60,7 @@
         <h1 class="mt-32 text-white text-6xl font-bold">
             Komentarze
         </h1>
-        <p class="text-white">
+        <p class="text-white whitespace-pre">
             {currentAnswer.content||""}
         </p>
     </div>
@@ -84,7 +84,7 @@
         <div class="max-w-md mx-auto bg-gray-800 rounded-xl shadow-md overflow-hidden md:max-w-2xl my-4">
             <div class="md:flex">
                 <div class="p-8">
-                    <p class="block mt-1 text-lg leading-tight font-medium">{item.content}</p>
+                    <p class="block mt-1 text-lg leading-tight font-medium whitespace-pre">{item.content}</p>
                     <p class="mt-2 text-gray-500">{item.author.displayName}</p>
                 </div>
             </div>
