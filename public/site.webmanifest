@@ -15,6 +15,6 @@
     ],
     "theme_color": "#312e81",
     "background_color": "#312e81",
-    "start_url": "https://czydobrze.netlify.app",
+    "start_url": "/",
     "display": "standalone"
 }

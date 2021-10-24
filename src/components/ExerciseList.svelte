@@ -1,45 +1,24 @@
 <script lang="ts">
     import { onMount } from 'svelte';
     let currentSection = {
-        "id":0,
+        "id":"",
         "title":"",
         "description":""
     };
     let exercises = [];
-    let sectionId:number;
+    let sectionId:string;
     onMount(async () => {
         const urlParams:URLSearchParams = new URLSearchParams(window.location.search);
-        sectionId = Number(urlParams.get('id'));
-        //TODO: Fetch current section from API
-        currentSection={
-            "id":sectionId,
-            "title": "Sekcja "+sectionId,
-            "description": "Tabliczka mnożenia"
-        }
-        document.title=`${currentSection.title} | Czy dobrze?`;
-        //TODO: Fetch exercises from API
-        exercises = [
-            {
-                "id":"1",
-                "inBookId": "1",
-                "description": "Ile dni upłynęło od dnia urodzin Karola Wojtyły, czyli od 18 maja 1920 roku do dnia jego chrztu 20 czerwca 1920 roku?"
-            },
-            {
-                "id":"2",
-                "inBookId": "2",
-                "description": "Przyjmijmy, że spód jednej kremówki ma kształt kwadratu o boku 8 cm. Jaki\n" +
-                    "jest obwód prostokątnej tacy, na której równo jedna obok drugiej ułożono dokładnie 54 kremówki.\n" +
-                    "Kremówki zajęły całą powierzchnię tacy. Każdy bok tej tacy jest dłuższy niż 40 cm. Zapisz\n" +
-                    "obliczenia i podaj odpowiedź z jednostką."
-            },
-            {
-                "id":"3",
-                "inBookId": "3",
-                "description": "We wrześniu 1930, po zdaniu egzaminów wstępnych, Karol Wojtyła rozpoczął\n" +
-                    "naukę w 8-letnim Państwowym Gimnazjum Męskim im. Marcina Wadowity. Wynik, którego\n" +
-                    "z podanych działań jest równy 1930?"
-            }
-        ];
+        sectionId = urlParams.get('id');
+        fetch(`https://localhost:5001/api/section/${sectionId}`).then(d=>{d.json().then(section=>
+        {
+            currentSection=section
+            document.title=`${currentSection.title} | Czy dobrze?`;
+        })})
+        fetch(`https://localhost:5001/api/section/${sectionId}/exercises?page=0&amount=100`).then(d=>{d.json().then(exs=>
+        {
+            exercises=exs
+        })})
     });
 </script>
 <div class="container max-w-5xl mx-auto px-4">

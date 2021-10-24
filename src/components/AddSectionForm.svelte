@@ -1,9 +1,9 @@
 <script lang="ts">
     import { onMount } from 'svelte';
-    let bookId:number;
+    let bookId:string;
     onMount(async () => {
         const urlParams:URLSearchParams = new URLSearchParams(window.location.search);
-        bookId=Number(urlParams.get('bookId'));
+        bookId=urlParams.get('bookId');
         sectionData.textbookId=bookId;
     })
     let sectionData={
@@ -13,7 +13,17 @@
     }
     function submit(){
         console.log(sectionData)
-        //TODO: submit section data
+        fetch("https://localhost:5001/api/section",
+            {
+                "method":"POST",
+                "body":JSON.stringify(sectionData),
+                "headers": {"content-type":"application/json"}
+            }
+        ).then(d=>{d.json().then(data=>
+        {
+            if(d.ok)
+                location.href=`/section?id=${data["id"]}`
+        })})
     }
 </script>
 <slot></slot>

@@ -1,76 +1,38 @@
 <script lang="ts">
     import { onMount } from 'svelte';
     let currentExercise = {};
+    let answers = [];
     let ownAnswer = {
         "content":"",
-        "excerciseId":""
+        "exerciseId":""
     }
     function submitOwnAnswer(){
         console.log(ownAnswer)
-        //TODO: submit answer data
+        fetch("https://localhost:5001/api/answer",
+            {
+                "method": "POST",
+                "body": JSON.stringify(ownAnswer),
+                "headers": {"content-type": "application/json"}
+            }
+        ).then(d2 => {
+            d2.json().then(data2 => {
+                if (d2.ok)
+                    location.reload()
+            })
+        })
     }
     onMount(async () => {
         const urlParams = new URLSearchParams(window.location.search);
-        ownAnswer.excerciseId = urlParams.get('id');
-        //TODO: Fetch current exercise from API
-        currentExercise=
-            {
-                "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-                "created": "2021-10-19T20:30:20.913Z",
-                "updated": "2021-10-19T20:30:20.913Z",
-                "inBookId": "Nr zadania",
-                "description": "Opis zadania",
-                "answers": [
-                    {
-                        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-                        "created": "2021-10-19T20:30:20.913Z",
-                        "updated": "2021-10-19T20:30:20.913Z",
-                        "author": {
-                            "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-                            "created": "2021-10-19T20:30:20.913Z",
-                            "updated": "2021-10-19T20:30:20.913Z",
-                            "displayName": "Nazwa użytkownika",
-                            "points": 0
-                        },
-                        "content": "Treść odpowiedzi",
-                        "accepted": true,
-                        "votes": [
-                            {
-                                "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-                                "created": "2021-10-19T20:30:20.913Z",
-                                "updated": "2021-10-19T20:30:20.913Z",
-                                "voter": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-                                "value": 0
-                            }
-                        ]
-                    }
-                ],
-                "comments": [
-                    {
-                        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-                        "created": "2021-10-19T20:30:20.913Z",
-                        "updated": "2021-10-19T20:30:20.913Z",
-                        "author": {
-                            "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-                            "created": "2021-10-19T20:30:20.913Z",
-                            "updated": "2021-10-19T20:30:20.913Z",
-                            "displayName": "string",
-                            "points": 0
-                        },
-                        "content": "string",
-                        "votes": [
-                            {
-                                "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-                                "created": "2021-10-19T20:30:20.913Z",
-                                "updated": "2021-10-19T20:30:20.913Z",
-                                "voter": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-                                "value": 0
-                            }
-                        ]
-                    }
-                ]
-            }
-        document.title=`${currentExercise.description} | Czy dobrze?`;
+        ownAnswer.exerciseId = urlParams.get('id');
+        fetch(`https://localhost:5001/api/exercise/${urlParams.get('id')}`).then(d=>{d.json().then(ex=>
+        {
+            currentExercise=ex
+            document.title=`${currentExercise["inBookId"]} | Czy dobrze?`;
+        })})
+        fetch(`https://localhost:5001/api/exercise/${urlParams.get('id')}/answers?page=0&amount=100`).then(d=>{d.json().then(ans=>
+        {
+            answers=ans
+        })})
     });
     function like(){
         // TODO: send like
@@ -120,16 +82,15 @@
             </div>
         </div>
     </div>
-    {#each currentExercise.answers||[] as item}
+    {#each answers||[] as item}
             <div class="max-w-md mx-auto bg-gray-800 rounded-xl shadow-md overflow-hidden md:max-w-2xl my-4">
                 <div class="md:flex">
                     <div class="p-8">
                         <p class="block mt-1 text-lg leading-tight font-medium">{item.content}</p>
-                        <p class="mt-2 text-gray-500">{item.author.displayName}</p>
                     </div>
                 </div>
                 <div>
-                    <div class="px-8 py-4">
+                    <div class="px-8 py-2">
                         <p class="block">
                         <a href="/comments?answerId={item.id}">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -2,47 +2,35 @@
     import { onMount } from 'svelte';
     let comments = [];
     let ownComment = {
-        "content":"",
-        "answerId":""
+        "Content":"",
     }
+    let currentAnswer = {};
     function submitOwnComment(){
         console.log(ownComment)
-        //TODO: submit comment data
+        fetch(`https://localhost:5001/api/answer/${currentAnswer["id"]}/comment?Content=${ownComment.Content}`,
+            {
+                "method": "POST",
+                "body": JSON.stringify(ownComment),
+                "headers": {"content-type": "application/json"}
+            }
+        ).then(d2 => {
+            d2.json().then(data2 => {
+                if (d2.ok)
+                    location.reload()
+            })
+        })
     }
     onMount(async () => {
         const urlParams = new URLSearchParams(window.location.search);
-        ownComment.answerId = urlParams.get('answerId');
-        //TODO: Fetch current exercise from API
-        comments=[
-            {
-                "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-                "created": "2021-10-20T21:03:13.980Z",
-                "updated": "2021-10-20T21:03:13.980Z",
-                "author": {
-                    "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-                    "created": "2021-10-20T21:03:13.980Z",
-                    "updated": "2021-10-20T21:03:13.980Z",
-                    "displayName": "string",
-                    "points": 0
-                },
-                "content": "string",
-                "votes": [
-                    {
-                        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-                        "created": "2021-10-20T21:03:13.980Z",
-                        "updated": "2021-10-20T21:03:13.980Z",
-                        "voter": {
-                            "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-                            "created": "2021-10-20T21:03:13.980Z",
-                            "updated": "2021-10-20T21:03:13.980Z",
-                            "displayName": "string",
-                            "points": 0
-                        },
-                        "value": 0,
-                        "comment": "string"
-                    }
-                ]
-            }]
+        fetch(`https://localhost:5001/api/answer/${urlParams.get('answerId')}`).then(d=>{d.json().then(ans=>
+        {
+            currentAnswer=ans
+            document.title=`Komentarze | ${currentAnswer["content"]} | Czy dobrze?`;
+        })})
+        fetch(`https://localhost:5001/api/answer/${urlParams.get('answerId')}/comments?page=0&amount=100`).then(d=>{d.json().then(com=>
+        {
+            comments=com
+        })})
     });
     function like(id){
         // TODO: send like
@@ -68,6 +56,14 @@
     }
 </script>
 <div class="container max-w-5xl mx-auto px-4">
+    <div class="w-4/5 mx-auto">
+        <h1 class="mt-32 text-white text-6xl font-bold">
+            Komentarze
+        </h1>
+        <p class="text-white">
+            {currentAnswer.content||""}
+        </p>
+    </div>
     <slot></slot>
     <div class="max-w-md mx-auto bg-gray-900 rounded-xl shadow-md overflow-hidden md:max-w-2xl my-4">
         <div class="md:flex">
@@ -75,7 +71,7 @@
                 <div class="uppercase tracking-wide text-sm text-indigo-500 font-semibold">Twój komentarz</div>
                 <div class="flex flex-wrap -mx-3 mb-6 mt-3">
                     <div class="w-full px-3">
-                        <textarea id="exercise-answer" bind:value={ownComment.content} placeholder="Napisz swój komentarz..." class="appearance-none block w-full bg-gray-200 text-gray-700 border {ownComment.content.length>0?'border-gray-200':'border-red-500'} rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"></textarea>
+                        <textarea id="exercise-answer" bind:value={ownComment.Content} placeholder="Napisz swój komentarz..." class="appearance-none block w-full bg-gray-200 text-gray-700 border {ownComment.Content.length>0?'border-gray-200':'border-red-500'} rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"></textarea>
                     </div>
                 </div>
                 <button on:click={submitOwnComment} class="w-full shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="button">

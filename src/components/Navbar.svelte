@@ -1,4 +1,10 @@
 <script lang="ts">
+    import { onMount } from 'svelte';
+    onMount(async () => {
+        if ('serviceWorker' in navigator) {
+            await navigator.serviceWorker.register('/sw.js');
+        }
+    })
     let mobileMenuOpen:boolean = false;
 </script>
 <nav class="bg-gray-600">

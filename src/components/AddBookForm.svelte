@@ -16,7 +16,17 @@
     }
     function submit(){
         console.log(bookData)
-        //TODO: submit book data
+        fetch("https://localhost:5001/api/textbook",
+            {
+                "method":"POST",
+                "body":JSON.stringify(bookData),
+                "headers": {"content-type":"application/json"}
+            }
+        ).then(d=>{d.json().then(data=>
+        {
+            if(d.ok)
+                location.href=`/book?id=${data["id"]}`
+        })})
     }
 </script>
 <slot></slot>
@@ -55,10 +65,10 @@
             <div class="relative">
                 <select bind:value={bookData.classYear} class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
                     {#each classesSP as c, i}
-                        <option value="{i}">{c}. szkoły podstawowej</option>
+                        <option value="{i+1}">{c}. szkoły podstawowej</option>
                     {/each}
                     {#each classesLIC as c, i}
-                        <option value="{i+classesSP.length}">{c}. liceum</option>
+                        <option value="{i+1+classesSP.length}">{c}. liceum</option>
                     {/each}
                 </select>
                 <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">

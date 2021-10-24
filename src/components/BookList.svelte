@@ -3,32 +3,26 @@
         let cl:number;
         let clFormat:string="";
         let books=[];
+        let currentPage:number = 0;
+        let newBatch=[];
+        $: books = [
+            ...books,
+            ...newBatch
+        ];
+        function fetchData(){
+            fetch(`https://localhost:5001/api/textbook?page=${currentPage++}&amount=100`).then(d=>{d.json().then(fetchedBooks=>
+            {
+                newBatch=fetchedBooks.filter(obj => {
+                    return obj.classYear === cl
+                })
+            })})
+        }
         onMount(async () => {
             const urlParams:URLSearchParams = new URLSearchParams(window.location.search);
             cl = Number(urlParams.get('id'));
-            clFormat = `${cl<8?cl+1:cl-7} ${cl>7?"liceum":"szkoły podstawowej"}`;
+            clFormat = `${cl<9?cl:cl-8} ${cl>8?"liceum":"szkoły podstawowej"}`;
             document.title=`Klasa ${clFormat} | Czy dobrze?`;
-            //TODO: Fetch books from API
-            books = [
-                {
-                    "id": "1",
-                    "title": "Test 1",
-                    "subject": "Informatyka",
-                    "publisher": "Admin"
-                },
-                {
-                    "id": "2",
-                    "title": "Test 2",
-                    "subject": "Język angielski",
-                    "publisher": "Admin"
-                },
-                {
-                    "id": "3",
-                    "title": "Test 3",
-                    "subject": "Fizyka",
-                    "publisher": "Admin"
-                }
-            ];
+            fetchData();
         });
 </script>
 <div class="container max-w-5xl mx-auto px-4">

@@ -1,24 +1,48 @@
 <script lang="ts">
     import { onMount } from 'svelte';
-    let sectionId:number;
+    let sectionId:string;
     onMount(async () => {
         const urlParams:URLSearchParams = new URLSearchParams(window.location.search);
-        sectionId=Number(urlParams.get('sectionId'));
+        sectionId=urlParams.get('sectionId');
         exerciseData.sectionId=sectionId;
     })
     let exerciseData={
         "inBookId": "",
         "description": "",
-        "sectionId": sectionId,
-        "answers": [
-            {
-                "content": ""
-            }
-        ]
+        "sectionId": sectionId
+    }
+    let answerData={
+        "exerciseId": "",
+        "content": ""
     }
     function submit(){
         console.log(exerciseData)
-        //TODO: submit exercise data
+        if(answerData.content.length===0)
+            return
+        fetch("https://localhost:5001/api/exercise",
+            {
+                "method":"POST",
+                "body":JSON.stringify(exerciseData),
+                "headers": {"content-type":"application/json"}
+            }
+        ).then(d=>{d.json().then(data=>
+        {
+            if(d.ok) {
+                answerData["exerciseId"]=data["id"]
+                fetch("https://localhost:5001/api/answer",
+                    {
+                        "method": "POST",
+                        "body": JSON.stringify(answerData),
+                        "headers": {"content-type": "application/json"}
+                    }
+                ).then(d2 => {
+                    d2.json().then(data2 => {
+                        if (d2.ok)
+                            location.href = `/exercise?id=${data["id"]}`
+                    })
+                })
+            }
+        })})
     }
 </script>
 <slot></slot>
@@ -48,8 +72,8 @@
             <label class="block uppercase tracking-wide text-gray-200 text-xs font-bold mb-2" for="exercise-answer">
                 Treść
             </label>
-            <textarea id="exercise-answer" bind:value={exerciseData.answers[0].content} placeholder="Podaj swoje rozwiązanie do tego zadania" class="appearance-none block w-full bg-gray-200 text-gray-700 border {exerciseData.answers[0].content.length>0?'border-gray-200':'border-red-500'} rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"></textarea>
-            <p class="text-red-500 text-xs italic {exerciseData.answers[0].content.length>0?'hidden':''}">Jako niezweryfikowany użytkownik musisz podać swoje rozwiązanie przed dodaniem zadania.</p>
+            <textarea id="exercise-answer" bind:value={answerData.content} placeholder="Podaj swoje rozwiązanie do tego zadania" class="appearance-none block w-full bg-gray-200 text-gray-700 border {answerData.content.length>0?'border-gray-200':'border-red-500'} rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"></textarea>
+            <p class="text-red-500 text-xs italic {answerData.content.length>0?'hidden':''}">Jako niezweryfikowany użytkownik musisz podać swoje rozwiązanie przed dodaniem zadania.</p>
         </div>
     </div>
     <div class="md:flex md:items-center mt-8">

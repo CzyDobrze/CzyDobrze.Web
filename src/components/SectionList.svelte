@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount } from 'svelte';
     let currentBook = {
-        "id":0,
+        "id":"",
         "title":"",
         "subject":"",
         "publisher":""
@@ -9,33 +9,16 @@
     let sections = [];
     onMount(async () => {
         const urlParams:URLSearchParams = new URLSearchParams(window.location.search);
-        const bookId:number = Number(urlParams.get('id'));
-        //TODO: Fetch current book from API
-        currentBook={
-            "id":bookId,
-            "title": "Test "+bookId,
-            "subject": "Matematyka",
-            "publisher": "Admin"
-        }
-        document.title=`${currentBook.title} | Czy dobrze?`;
-        //TODO: Fetch sections from API
-        sections = [
-            {
-                "id":"1",
-                "title": "Sekcja 1",
-                "description": "Tabliczka mnożenia"
-            },
-            {
-                "id":"2",
-                "title": "Sekcja 2",
-                "description": "Układy równań"
-            },
-            {
-                "id":"3",
-                "title": "Sekcja 3",
-                "description": "Macierze"
-            }
-        ];
+        const bookId:string = urlParams.get('id');
+        fetch(`https://localhost:5001/api/textbook/${bookId}`).then(d=>{d.json().then(book=>
+        {
+            currentBook=book
+            document.title=`${currentBook.title} | Czy dobrze?`;
+        })})
+        fetch(`https://localhost:5001/api/textbook/${bookId}/sections?page=0&amount=100`).then(d=>{d.json().then(sects=>
+        {
+            sections=sects
+        })})
     });
 </script>
 <div class="container max-w-5xl mx-auto px-4">
