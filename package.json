@@ -9,6 +9,7 @@
     "preview": "astro preview"
   },
   "devDependencies": {
+    "@auth0/auth0-spa-js": "^1.19.2",
     "astro": "^0.20.12",
     "tailwindcss": "^2.2.17"
   },

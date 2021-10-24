@@ -7,7 +7,7 @@
     let currentAnswer = {};
     function submitOwnComment(){
         console.log(ownComment)
-        fetch(`https://localhost:5001/api/answer/${currentAnswer["id"]}/comment?Content=${ownComment.Content}`,
+        fetch(`https://czydobrze.bazik.xyz/api/answer/${currentAnswer["id"]}/comment?Content=${ownComment.Content}`,
             {
                 "method": "POST",
                 "body": JSON.stringify(ownComment),
@@ -22,12 +22,12 @@
     }
     onMount(async () => {
         const urlParams = new URLSearchParams(window.location.search);
-        fetch(`https://localhost:5001/api/answer/${urlParams.get('answerId')}`).then(d=>{d.json().then(ans=>
+        fetch(`https://czydobrze.bazik.xyz/api/answer/${urlParams.get('answerId')}`).then(d=>{d.json().then(ans=>
         {
             currentAnswer=ans
             document.title=`Komentarze | ${currentAnswer["content"]} | Czy dobrze?`;
         })})
-        fetch(`https://localhost:5001/api/answer/${urlParams.get('answerId')}/comments?page=0&amount=100`).then(d=>{d.json().then(com=>
+        fetch(`https://czydobrze.bazik.xyz/api/answer/${urlParams.get('answerId')}/comments?page=0&amount=100`).then(d=>{d.json().then(com=>
         {
             comments=com
         })})

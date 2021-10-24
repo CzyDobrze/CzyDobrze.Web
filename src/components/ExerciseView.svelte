@@ -8,7 +8,7 @@
     }
     function submitOwnAnswer(){
         console.log(ownAnswer)
-        fetch("https://localhost:5001/api/answer",
+        fetch("https://czydobrze.bazik.xyz/api/answer",
             {
                 "method": "POST",
                 "body": JSON.stringify(ownAnswer),
@@ -24,12 +24,12 @@
     onMount(async () => {
         const urlParams = new URLSearchParams(window.location.search);
         ownAnswer.exerciseId = urlParams.get('id');
-        fetch(`https://localhost:5001/api/exercise/${urlParams.get('id')}`).then(d=>{d.json().then(ex=>
+        fetch(`https://czydobrze.bazik.xyz/api/exercise/${urlParams.get('id')}`).then(d=>{d.json().then(ex=>
         {
             currentExercise=ex
             document.title=`${currentExercise["inBookId"]} | Czy dobrze?`;
         })})
-        fetch(`https://localhost:5001/api/exercise/${urlParams.get('id')}/answers?page=0&amount=100`).then(d=>{d.json().then(ans=>
+        fetch(`https://czydobrze.bazik.xyz/api/exercise/${urlParams.get('id')}/answers?page=0&amount=100`).then(d=>{d.json().then(ans=>
         {
             answers=ans
         })})

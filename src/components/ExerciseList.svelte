@@ -10,12 +10,12 @@
     onMount(async () => {
         const urlParams:URLSearchParams = new URLSearchParams(window.location.search);
         sectionId = urlParams.get('id');
-        fetch(`https://localhost:5001/api/section/${sectionId}`).then(d=>{d.json().then(section=>
+        fetch(`https://czydobrze.bazik.xyz/api/section/${sectionId}`).then(d=>{d.json().then(section=>
         {
             currentSection=section
             document.title=`${currentSection.title} | Czy dobrze?`;
         })})
-        fetch(`https://localhost:5001/api/section/${sectionId}/exercises?page=0&amount=100`).then(d=>{d.json().then(exs=>
+        fetch(`https://czydobrze.bazik.xyz/api/section/${sectionId}/exercises?page=0&amount=100`).then(d=>{d.json().then(exs=>
         {
             exercises=exs
         })})

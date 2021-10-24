@@ -13,7 +13,7 @@
     }
     function submit(){
         console.log(sectionData)
-        fetch("https://localhost:5001/api/section",
+        fetch("https://czydobrze.bazik.xyz/api/section",
             {
                 "method":"POST",
                 "body":JSON.stringify(sectionData),

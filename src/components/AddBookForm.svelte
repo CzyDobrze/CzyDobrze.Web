@@ -16,7 +16,7 @@
     }
     function submit(){
         console.log(bookData)
-        fetch("https://localhost:5001/api/textbook",
+        fetch("https://czydobrze.bazik.xyz/api/textbook",
             {
                 "method":"POST",
                 "body":JSON.stringify(bookData),

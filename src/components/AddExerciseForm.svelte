@@ -19,7 +19,7 @@
         console.log(exerciseData)
         if(answerData.content.length===0)
             return
-        fetch("https://localhost:5001/api/exercise",
+        fetch("https://czydobrze.bazik.xyz/api/exercise",
             {
                 "method":"POST",
                 "body":JSON.stringify(exerciseData),
@@ -29,7 +29,7 @@
         {
             if(d.ok) {
                 answerData["exerciseId"]=data["id"]
-                fetch("https://localhost:5001/api/answer",
+                fetch("https://czydobrze.bazik.xyz/api/answer",
                     {
                         "method": "POST",
                         "body": JSON.stringify(answerData),
